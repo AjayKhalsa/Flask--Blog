@@ -1,7 +1,10 @@
 from flask import Flask, render_template, url_for
+from forms import RegistrationForm, LoginForm
 app = Flask(__name__)
 
 # This is where you add routes
+app.config['SECRET_KEY'] = "9376e3eff903423610ce4ba50fe6e87cee218d328b7d12bddf"
+
 
 posts = [
     {
@@ -28,6 +31,18 @@ def hello():
 @app.route("/about")
 def about():
     return render_template('about.html', title='About')
+
+
+@app.route("/register")
+def register():
+    form = RegistrationForm()
+    return render_template('register.html', title='Register', form=form)
+
+
+@app.route("/login")
+def login():
+    form = LoginForm()
+    return render_template('login.html', title='Login', form=form)
 
 
 # if you add the follying code you can directly run this file in python and won't need to use flask run and set debug environments
